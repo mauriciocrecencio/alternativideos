@@ -1,6 +1,7 @@
 {
   "name": "alternativideos",
   "private": true,
+  "main": "server.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
