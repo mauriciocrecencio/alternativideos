@@ -11,7 +11,7 @@ import { IVideo } from "@/types/videoInterface";
 import { useAuthState } from "react-firebase-hooks/auth";
 import UnregisteredTitle from "@/components/unregisteredTitle";
 import Image from "next/image";
-import emptyVideo from "public/emptyVideo.svg";
+import emptyVideo from "../../public/emptyVideo.svg";
 
 interface IProps {
   videos: IVideo[];

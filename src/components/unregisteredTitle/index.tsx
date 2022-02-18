@@ -6,7 +6,7 @@ import unregistered from "public/unregistered.svg";
 const UnregisteredTitle = () => {
   return (
     <Box className={styles.unregistered__container} marginTop={6} marginBottom={8}>
-      <Image src={unregistered} height={400} />
+      {/* <img src={unregistered} height={400} /> */}
       <div className={styles.unregistered__paragraph}>
         <h1>que pena :(</h1>
         <h2>

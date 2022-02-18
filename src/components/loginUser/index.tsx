@@ -17,7 +17,7 @@ const LoginUser = () => {
   if (loading) return <CircularProgress />;
   return (
     <div className={styles.login}>
-      {isMobile && <Image src={imageLogin} width={700} height={400} />}
+      {/* {isMobile && <img src={imageLogin} width={700} height={400} />} */}
       <div className={styles.login__container}>
         <TextField
           type="text"
