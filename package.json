@@ -1,12 +1,14 @@
 {
   "name": "alternativideos",
   "private": true,
+  "main": "server.js",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
-    "start": "next start",
-    "lint": "next lint",
-    "export": "next export"
+    "build": "next build",
+    "out": "next build && next export",
+    "deploy2": "cross-env NODE_ENV=production firebase deploy --only functions,hosting",
+    "deploy": "firebase deploy --only functions,hosting",
+    "start": "next start"
   },
   "dependencies": {
     "@emotion/react": "^11.7.1",
@@ -16,6 +18,8 @@
     "@reduxjs/toolkit": "^1.7.2",
     "@types/react-redux": "^7.1.22",
     "firebase": "^9.6.6",
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.18.1",
     "next": "12.0.10",
     "next-images": "^1.8.4",
     "react": "17.0.2",
