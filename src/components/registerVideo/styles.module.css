@@ -1,0 +1,26 @@
+.registerVideo__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+}
+.registerVideo__container h2 {
+  margin: 0 44px;
+}
+
+.registerVideo__input {
+  font-size: 18px;
+  width: 300px;
+}
+
+.registerVideo__button {
+  padding: 12px 18px 11px;
+  margin-left: -2px;
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .registerVideo__container {
+    flex-direction: column;
+  }
+}
