@@ -23,7 +23,6 @@ interface IProps {
 const Home = ({ videos, registerVideo, toggleLike, toggleDislike }: IProps) => {
   const [user, loading] = useAuthState(auth);
   const router = useRouter();
-  console.log(videos);
   if (loading) return <CircularProgress />;
   return (
     <Container maxWidth="md" disableGutters>

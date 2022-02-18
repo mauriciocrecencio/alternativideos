@@ -23,7 +23,6 @@ const RegisterVideo = ({
     register(url);
   };
   const [url, setUrl] = useState("");
-  console.log(url);
   return (
     <Box paddingTop={2} paddingBottom={4}>
       <div className={styles.registerVideo__container}>
