@@ -11,7 +11,7 @@ import { IVideo } from "@/types/videoInterface";
 import { useAuthState } from "react-firebase-hooks/auth";
 import UnregisteredTitle from "@/components/unregisteredTitle";
 import Image from "next/image";
-import emptyVideo from "../../public/emptyVideo.svg";
+import emptyVideo from "public/emptyVideo.svg";
 
 interface IProps {
   videos: IVideo[];
@@ -79,7 +79,7 @@ const Home = ({ videos, registerVideo, toggleLike, toggleDislike }: IProps) => {
           ) : (
             <div className="emptyVideos__container">
               <h1>não temos nenhum vídeo cadastrado...</h1>
-              <img src="emptyVideo.svg" height={400} />
+              <Image src={emptyVideo} height={400} />
             </div>
           )}
         </Grid>
