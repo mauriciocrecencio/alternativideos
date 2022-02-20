@@ -9,3 +9,9 @@ export interface IVideo {
     users: string[];
   };
 }
+
+export interface IVideoState {
+  videos: {
+    videos: IVideo[];
+  };
+}

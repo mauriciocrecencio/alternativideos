@@ -7,23 +7,29 @@ import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { toggleLike } from "@/store/actions/toggleLike";
 import { toggleDislike } from "@/store/actions/toggleDislike";
-import { IVideo } from "@/types/videoInterface";
+import { IVideo } from "@/types/IVideo";
 import { useAuthState } from "react-firebase-hooks/auth";
 import UnregisteredTitle from "@/components/unregisteredTitle";
 import Image from "next/image";
 import emptyVideo from "public/emptyVideo.svg";
+import Loading from "@/components/loading";
+import { IVideoState } from "@/types/IVideo";
+import { ILoadingState } from "@/types/ILoading";
 
 interface IProps {
   videos: IVideo[];
   registerVideo: (url: string) => void;
   toggleLike: (url: string, userId: string | undefined) => void;
   toggleDislike: (url: string, userId: string | undefined) => void;
+  isLoading: boolean;
 }
 
-const Home = ({ videos, registerVideo, toggleLike, toggleDislike }: IProps) => {
+const Home = ({ videos, registerVideo, toggleLike, toggleDislike, isLoading }: IProps) => {
   const [user, loading] = useAuthState(auth);
   const router = useRouter();
-  if (loading) return <CircularProgress />;
+
+  if (loading) return <Loading />;
+  if (isLoading) return <Loading />;
   return (
     <Container maxWidth="md" disableGutters>
       <Grid container justifyContent="space-around" direction="column" alignContent="center">
@@ -33,8 +39,8 @@ const Home = ({ videos, registerVideo, toggleLike, toggleDislike }: IProps) => {
           container
           alignContent="center"
           marginTop={2}
-          spacing={2}
         >
+          {user && <div className="user__welcome">Seja bem vindo {user.email}</div>}
           {!user && (
             <Button variant="contained" size="large" onClick={() => router.push("/login")}>
               Login
@@ -63,7 +69,7 @@ const Home = ({ videos, registerVideo, toggleLike, toggleDislike }: IProps) => {
             videos
               .sort((a, b) => b.like.value - a.like.value)
               .map(({ url, like, dislike }) => (
-                <Grid item key={url}>
+                <Grid item key={url} marginTop={6}>
                   <VideoCard
                     userDisliked={user ? dislike.users.includes(user.uid) : false}
                     userLiked={user ? like.users.includes(user.uid) : false}
@@ -88,8 +94,9 @@ const Home = ({ videos, registerVideo, toggleLike, toggleDislike }: IProps) => {
   );
 };
 
-const mapStateToProps = (state: { videos: { videos: IVideo[] } }) => ({
+const mapStateToProps = (state: IVideoState & ILoadingState) => ({
   videos: state.videos.videos,
+  isLoading: state.loading.isLoading,
 });
 
 const mapDispatchToProps = {

@@ -2,7 +2,7 @@ import { Button, Paper, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import styles from "./styles.module.css";
-import { IVideo } from "@/types/videoInterface";
+import { IVideo } from "@/types/IVideo";
 
 const RegisterVideo = ({
   register,
@@ -24,7 +24,7 @@ const RegisterVideo = ({
   };
   const [url, setUrl] = useState("");
   return (
-    <Box paddingTop={2} paddingBottom={4}>
+    <Box paddingTop={6} paddingBottom={6}>
       <div className={styles.registerVideo__container}>
         <h2>Cadastrar novo vídeo</h2>
         <div>
@@ -33,13 +33,11 @@ const RegisterVideo = ({
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             placeholder="URL do vídeo"
-            // size="medium"
           />
           <Button
             className={styles.registerVideo__button}
             onClick={() => registerVideo()}
             variant="contained"
-            // size="small"
           >
             Cadastrar
           </Button>

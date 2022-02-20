@@ -6,15 +6,12 @@
 }
 
 .unregistered__paragraph h1 {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: #3f3d56;
-}
-.unregistered__paragraph h2 {
   padding-top: 30px;
-  color: #737cfe;
+  color: #3f3d56;
   text-align: end;
 }
 
 .unregistered__paragraph span {
+  color: #737cfe;
   text-decoration: underline;
 }

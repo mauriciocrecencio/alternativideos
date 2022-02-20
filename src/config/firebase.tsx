@@ -1,3 +1,4 @@
+import { toggleLoading } from "@/store/actions/loading";
 import { initializeApp } from "firebase/app";
 import {
   GoogleAuthProvider,
@@ -8,6 +9,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { getFirestore, query, getDocs, collection, where, addDoc } from "firebase/firestore";
+import { useDispatch } from "react-redux";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBvrQvrEo3k1uYFEBy9gLLkg3W-EcQxNc8",
@@ -21,7 +23,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-
 const googleProvider = new GoogleAuthProvider();
 const signInWithGoogle = async () => {
   try {
@@ -45,7 +46,9 @@ const signInWithGoogle = async () => {
 
 const loginWithEmailAndPassword = async (email: string, password: string) => {
   try {
+    toggleLoading("LOADING_START");
     await signInWithEmailAndPassword(auth, email, password);
+    toggleLoading("LOADING_END");
   } catch (err: any) {
     console.error(err);
     alert(err.message);

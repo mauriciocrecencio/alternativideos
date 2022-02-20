@@ -7,8 +7,12 @@ import styles from "./styles.module.css";
 import Image from "next/image";
 import imageRegister from "public/register.svg";
 import { TextField, useMediaQuery } from "@mui/material";
+import { toggleLoading } from "@/store/actions/loading";
+import { connect } from "react-redux";
+import { ILoadingProps, ILoadingState } from "@/types/ILoading";
+import Loading from "../loading";
 
-const RegisterUser = () => {
+const RegisterUser = ({ toggleLoading, isLoading }: ILoadingProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -16,9 +20,11 @@ const RegisterUser = () => {
   const router = useRouter();
   const isMobile = useMediaQuery("(min-width:600px)");
 
-  const register = () => {
+  const register = async () => {
     if (!name) alert("Please enter name");
-    registerWithEmailAndPassword(name, email, password);
+    toggleLoading("SHOW");
+    await registerWithEmailAndPassword(name, email, password);
+    toggleLoading("STOP");
   };
 
   useEffect(() => {
@@ -26,9 +32,10 @@ const RegisterUser = () => {
     if (user) router.push("/");
   }, [user, loading]);
 
+  if (isLoading) return <Loading />;
   return (
     <div className={styles.register}>
-      {isMobile && <img src="register.svg" width={700} />}
+      {isMobile && <Image src={imageRegister} width={700} />}
 
       <div className={styles.register__container}>
         <TextField
@@ -62,4 +69,13 @@ const RegisterUser = () => {
     </div>
   );
 };
-export default RegisterUser;
+
+const mapStateToProps = (state: ILoadingState) => ({
+  isLoading: state.loading.isLoading,
+});
+
+const mapDispatchToProps = {
+  toggleLoading,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterUser);

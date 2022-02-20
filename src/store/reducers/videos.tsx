@@ -1,4 +1,4 @@
-import { IVideo } from "@/types/videoInterface";
+import { IVideo } from "@/types/IVideo";
 
 const initialState: { videos: IVideo[] } = {
   videos: [],

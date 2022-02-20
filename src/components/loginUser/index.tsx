@@ -7,17 +7,26 @@ import { Button, CircularProgress, TextField, useMediaQuery } from "@mui/materia
 import Image from "next/image";
 import imageLogin from "public/login.svg";
 import styles from "./styles.module.css";
+import { connect } from "react-redux";
+import { toggleLoading } from "@/store/actions/loading";
+import Loading from "../loading";
+import { ILoadingProps } from "@/types/ILoading";
 
-const LoginUser = () => {
+const LoginUser = ({ toggleLoading, isLoading }: ILoadingProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading] = useAuthState(auth);
   const isMobile = useMediaQuery("(min-width:600px)");
 
-  if (loading) return <CircularProgress />;
+  const login = async () => {
+    toggleLoading("SHOW");
+    await loginWithEmailAndPassword(email, password);
+    toggleLoading("STOP");
+  };
+
+  if (isLoading) return <Loading />;
   return (
     <div className={styles.login}>
-      {isMobile && <img src="login.svg" width={700} height={400} />}
+      {isMobile && <Image src={imageLogin} width={700} height={400} />}
       <div className={styles.login__container}>
         <TextField
           type="text"
@@ -33,15 +42,15 @@ const LoginUser = () => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
-        <Button
-          className={styles.login__btn}
-          onClick={() => loginWithEmailAndPassword(email, password)}
-        >
+        <Button className={styles.login__btn} onClick={() => login()}>
           Login
         </Button>
-        {/* <Button className={styles.login__btn}login__google" onClick={signInWithGoogle}>
+        <Button
+          className={[styles.login__btn, styles.login__google].join(" ")}
+          onClick={signInWithGoogle}
+        >
           Entre com o Google
-        </Button> */}
+        </Button>
         <div>
           Não tem uma conta? <Link href="/register">Criar uma conta.</Link>.
         </div>
@@ -49,4 +58,13 @@ const LoginUser = () => {
     </div>
   );
 };
-export default LoginUser;
+
+const mapStateToProps = (state: { loading: { isLoading: boolean } }) => ({
+  isLoading: state.loading.isLoading,
+});
+
+const mapDispatchToProps = {
+  toggleLoading,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginUser);

@@ -1,6 +1,5 @@
 import store from "@/store";
 import "@/styles/globals.css";
-import { Container } from "@mui/material";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { Provider } from "react-redux";
