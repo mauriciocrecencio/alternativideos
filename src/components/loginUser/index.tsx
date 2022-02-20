@@ -26,7 +26,7 @@ const LoginUser = ({ toggleLoading, isLoading }: ILoadingProps) => {
   if (isLoading) return <Loading />;
   return (
     <div className={styles.login}>
-      {isMobile && <Image src={imageLogin} width={700} height={400} />}
+      {isMobile && <img src="/login.svg" width={700} height={400} />}
       <div className={styles.login__container}>
         <TextField
           type="text"

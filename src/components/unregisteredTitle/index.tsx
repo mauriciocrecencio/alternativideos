@@ -6,7 +6,7 @@ import unregistered from "public/unregistered.svg";
 const UnregisteredTitle = () => {
   return (
     <Box className={styles.unregistered__container} marginTop={6} marginBottom={8}>
-      <Image src={unregistered} height={400} />
+      <img src="/unregistered.svg" height={300} />
       <div className={styles.unregistered__paragraph}>
         <h1>
           você precisa fazer login para <span>curtir</span> e <span>registrar</span> vídeos!

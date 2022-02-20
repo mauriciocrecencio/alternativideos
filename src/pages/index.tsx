@@ -85,7 +85,7 @@ const Home = ({ videos, registerVideo, toggleLike, toggleDislike, isLoading }: I
           ) : (
             <div className="emptyVideos__container">
               <h1>não temos nenhum vídeo cadastrado...</h1>
-              <Image src={emptyVideo} height={400} />
+              <img src="/emptyVideo.svg" height={400} />
             </div>
           )}
         </Grid>

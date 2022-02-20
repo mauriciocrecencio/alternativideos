@@ -35,7 +35,7 @@ const RegisterUser = ({ toggleLoading, isLoading }: ILoadingProps) => {
   if (isLoading) return <Loading />;
   return (
     <div className={styles.register}>
-      {isMobile && <Image src={imageRegister} width={700} />}
+      {isMobile && <img src="/register.svg" width={700} />}
 
       <div className={styles.register__container}>
         <TextField
